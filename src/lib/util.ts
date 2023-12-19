@@ -20,3 +20,12 @@ export function useThrottle(fn: Function, time = 150) {
 export function getImage(path: string) {
     return `${location.protocol}//${location.hostname}:2020/d/Nickyzj/Photos${path}`
 }
+
+
+
+/** ------------ 杂项 ------------ **/
+
+/** 设置页面标题 */
+export function setTitle(...titles: string[]) {
+    document.title = [...titles, "NICKYZJ"].join(" | ")
+}

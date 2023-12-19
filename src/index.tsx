@@ -1,9 +1,31 @@
-import { createSignal } from "solid-js"
+import { createEffect, createSignal } from "solid-js"
 import { render } from "solid-js/web"
-import { getImage } from "./lib/util"
+import { A, Route, Router, useLocation } from "@solidjs/router"
+import { getImage, setTitle } from "./lib/util"
 import { user } from "./lib/store"
+import routes from "./lib/routes"
 
-function App() {
+function Routes() {
+    return (
+        <Router root={App}>
+            {routes.map(route =>
+                <Route path={route.path} component={route.component} />
+            )}
+        </Router>
+    )
+}
+
+function App(props: any) {
+    // 修改标题
+    const location = useLocation()
+    createEffect(() => {
+        const paths = location.pathname.match(/\/[^\/]*/)
+        if (!paths?.length) return
+        const route = routes.find(route => route.path.startsWith(paths[0]))
+        if (!route) return
+        setTitle(route.title)
+    })
+
     // 自动收起header
     // const [getIsHeader, setIsHeader] = createSignal(true)
     // onMount(() => {
@@ -35,10 +57,10 @@ function App() {
                     </button>
                     <div class="divider divider-horizontal self-center h-5"></div>
                     {/* 用户中心 */}
-                    <a href="/user" class="link link-hover flex items-center gap-1" /* onClick={() => addToast("用户数据维护中！", "warning")} */>
+                    <button class="link link-hover flex items-center gap-1" /* onClick={() => addToast("用户数据维护中！", "warning")} */>
                         <span class="hidden sm:inline dark:text-zinc-300">{user.username}</span>
                         <img src={getImage("/Avatars/Guest.webp")} alt="" class="w-12" />
-                    </a>
+                    </button>
                 </div>
             </header>
 
@@ -46,13 +68,9 @@ function App() {
                 <aside class={"hidden md:flex flex-col justify-between w-20 p-3 bg-white dark:bg-zinc-800 rounded-lg transition-all " + (getIsAside() ? "lg:w-36 xl:w-52" : "")}>
                     {/* 导航 */}
                     <nav class="button-group sticky top-3 flex flex-col gap-5 overflow-x-hidden">
-                        <a href="/" class="btn">home icon</a>
-                        {/* {routes.map(route =>
-                            <a href={route.id} class={classify("button", route.id === params.value.root ? "active" : "inactive", "hover:duration-0 active:duration-150")}>
-                                <Icon icon={route.icon} class={classify("shrink-0 w-6 transition-transform translate-x-1 lg:translate-x-0", !isAside && "!translate-x-1")} />
-                                <span class={classify("whitespace-nowrap opacity-0 lg:opacity-100 transition-opacity", !isAside && "!opacity-0")}>{route.title}</span>
-                            </a>
-                        )} */}
+                        {routes.filter(route => route.isNav).map(route =>
+                            <A href={route.path} activeClass="btn-neutral" end={route.path === "/"} class="btn">icon {route.title}</A>
+                        )}
                     </nav>
                     {/* 小工具 */}
                     <div class="sticky bottom-3">
@@ -63,10 +81,7 @@ function App() {
                     </div>
                 </aside>
                 {/* 路由页面 */}
-                <main class="flex-1 p-3 bg-white rounded-lg">
-                    <span class="text-3xl">Hello, solid.</span>
-                    <span class="mgc_home_3_line text-2xl"></span>
-                </main>
+                <main class="flex-1 p-3 bg-white rounded-lg">{props.children}</main>
             </div>
 
             <footer class="flex justify-center gap-1 p-3 text-sm text-zinc-400 bg-white rounded-lg dark:text-zinc-500">
@@ -81,4 +96,4 @@ function App() {
     </>
 }
 
-render(() => <App />, document.body)
+render(() => <Routes />, document.body)
