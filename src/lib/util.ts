@@ -18,7 +18,7 @@ export function useThrottle(fn: Function, time = 150) {
 
 /** 获取AList://Nickyzj/Photos下的图片资源 */
 export function getImage(path: string) {
-    return `${location.protocol}//${location.hostname}:2020/d/Nickyzj/Photos${path}`
+    return `http://nickyzj.run:2020/d/Nickyzj/Photos${path}`
 }
 
 

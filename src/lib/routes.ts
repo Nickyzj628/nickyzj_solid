@@ -8,7 +8,7 @@ const Anime = lazy(() => import("../routes/animes/anime"))
 const About = lazy(() => import("../routes/about"))
 
 export default [
-    { path: "/", component: Home, title: "动态", isNav: true },
+    { path: "/", component: Home, title: "主页", isNav: true },
     { path: "/blogs", component: Blogs, title: "博客", isNav: true },
     { path: "/blogs/:id", component: Blog, title: "加载中", isNav: false },
     { path: "/animes", component: Animes, title: "番剧", isNav: true },

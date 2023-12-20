@@ -6,14 +6,15 @@ import { user } from "./lib/store"
 import routes from "./lib/routes"
 
 function App(props: RouteSectionProps) {
-    // 修改标题
+    // 修改标题 (例/blogs/1234)
     const location = useLocation()
     createEffect(() => {
-    const paths = location.pathname.match(/\/[^\/]*/)
-    if (!paths?.length) return
-    const route = routes.find(route => route.path.startsWith(paths[0]))
-    if (!route) return
-    setTitle(route.title)
+        // 先从地址栏匹配/blogs和/1234
+        const paths = location.pathname.match(/\/[^\/]*/g)
+        if (!paths) return
+        // 再从路由表里找出路径有2个/且以/blogs开头的路由
+        const route = routes.find(route => route.path.match(/\//g)?.length === paths.length && route.path.startsWith(paths[0]))
+        setTitle(route ? route.title : "404")
     })
 
     // 自动收起header
@@ -33,7 +34,7 @@ function App(props: RouteSectionProps) {
         <section class="flex flex-col gap-3 min-h-screen p-3">
             <header class="flex items-center justify-between px-3 py-2 bg-white rounded-2xl">
                 {/* logo@大屏 */}
-                <a href="/" class="link hidden sm:flex items-center gap-1">
+                <a href="/" class="hidden sm:flex items-center gap-1">
                     <img src="/favicon.webp" alt="" class="w-12" />
                     <span class="text-xl tracking-wide">NICKYZJ</span>
                 </a>
@@ -59,12 +60,15 @@ function App(props: RouteSectionProps) {
                     {/* 导航 */}
                     <nav class="button-group sticky top-3 flex flex-col gap-5 overflow-x-hidden">
                         {routes.filter(route => route.isNav).map(route =>
-                            <A href={route.path} activeClass="" end={route.path === "/"} class="btn">icon {route.title}</A>
+                            <A href={route.path} activeClass="" end={route.path === "/"} class="button">
+                                <span class={"transition " + (getIsAside() ? "" : "-translate-x-0.5")}>icon</span>
+                                <span class={"whitespace-nowrap transition " + (getIsAside() ? "opacity-100" : "opacity-0")}>{route.title}</span>
+                            </A>
                         )}
                     </nav>
                     {/* 小工具 */}
                     <div class="sticky bottom-3">
-                        <button class="" onClick={() => setIsAside(!getIsAside())}>
+                        <button class="button aspect-square p-2" onClick={() => setIsAside(!getIsAside())}>
                             {/* <Icon icon={align_arrow_left} class={classify("w-5 transition", !isAside && "rotate-180")} /> */}
                             icon
                         </button>
@@ -76,11 +80,11 @@ function App(props: RouteSectionProps) {
 
             <footer class="flex justify-center gap-1 p-3 text-sm text-gray-400 bg-white rounded-2xl dark:text-gray-500">
                 <span>Powered by</span>
-                <a href="https://www.solidjs.com/" target="_blank" class="link">Solid</a>
+                <a href="https://solidjs.com" target="_blank" class="link">Solid</a>
                 <span>+</span>
-                <a href="https://tailwindcss.com/" target="_blank" class="link">Tailwind CSS</a>
+                <a href="https://tailwindcss.com" target="_blank" class="link">Tailwind CSS</a>
                 <span>+</span>
-                <a href="https://preline.co/index.html" target="_blank" class="link">Preline UI</a>
+                <a href="https://preline.co" target="_blank" class="link">Preline UI</a>
             </footer>
         </section>
     </>
