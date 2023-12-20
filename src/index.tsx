@@ -1,5 +1,6 @@
-import { createEffect, createSignal } from "solid-js"
-import { render } from "solid-js/web"
+import { Show, createEffect, createSignal } from "solid-js"
+import { Dynamic, render } from "solid-js/web"
+import { BiRegularArrowToLeft, BiRegularBell, BiRegularMoon, BiRegularSun } from "solid-icons/bi"
 import { A, Route, RouteSectionProps, Router, useLocation } from "@solidjs/router"
 import { getImage, setTitle } from "./lib/util"
 import { user } from "./lib/store"
@@ -30,6 +31,12 @@ function App(props: RouteSectionProps) {
     // 切换侧边栏
     const [getIsAside, setIsAside] = createSignal(true)
 
+    // 切换深色模式
+    const [getIsDark, setIsDark] = createSignal(false)
+    function setDark() {
+        setIsDark(!getIsDark())
+    }
+
     return <>
         <section class="flex flex-col gap-3 min-h-screen p-3">
             <header class="flex items-center justify-between px-3 py-2 bg-white rounded-2xl">
@@ -40,15 +47,14 @@ function App(props: RouteSectionProps) {
                 </a>
                 {/* menu@小屏 */}
                 <div class="flex sm:hidden">menu</div>
-                <div class="flex items-center gap-5">
+                <div class="flex items-center gap-4">
                     {/* 系统通知 */}
-                    <button class="" /* onClick={() => addToast("系统通知维护中！", "warning")} */>
-                        {/* <Icon icon={notification} class="w-6 dark:text-gray-300" /> */}
-                        icon
+                    <button class="button p-2 dark:text-gray-300 bg-transparent rounded-full">
+                        <BiRegularBell size={21} />
                     </button>
                     <div class="divider rounded-full h-5"></div>
                     {/* 用户中心 */}
-                    <button class="flex items-center gap-1" /* onClick={() => addToast("用户数据维护中！", "warning")} */>
+                    <button class="flex items-center gap-1">
                         <span class="hidden sm:inline dark:text-gray-300">{user.username}</span>
                         <img src={getImage("/Avatars/Guest.webp")} alt="" class="w-12" />
                     </button>
@@ -59,18 +65,22 @@ function App(props: RouteSectionProps) {
                 <aside class={"hidden md:flex flex-col justify-between w-20 p-3 bg-white dark:bg-gray-800 rounded-2xl transition-all " + (getIsAside() ? "lg:w-36 xl:w-52" : "")}>
                     {/* 导航 */}
                     <nav class="button-group sticky top-3 flex flex-col gap-5 overflow-x-hidden">
-                        {routes.filter(route => route.isNav).map(route =>
-                            <A href={route.path} activeClass="" end={route.path === "/"} class="button">
-                                <span class={"transition " + (getIsAside() ? "" : "-translate-x-0.5")}>icon</span>
+                        {routes.filter(route => Boolean(route.icon)).map(route =>
+                            <A href={route.path} end={route.path === "/"} class="button text-base" activeClass="bg-gray-200" inactiveClass="bg-transparent">
+                                <Dynamic component={route.icon} size={22} />
                                 <span class={"whitespace-nowrap transition " + (getIsAside() ? "opacity-100" : "opacity-0")}>{route.title}</span>
                             </A>
                         )}
                     </nav>
                     {/* 小工具 */}
-                    <div class="sticky bottom-3">
-                        <button class="button aspect-square p-2" onClick={() => setIsAside(!getIsAside())}>
-                            {/* <Icon icon={align_arrow_left} class={classify("w-5 transition", !isAside && "rotate-180")} /> */}
-                            icon
+                    <div class="sticky bottom-3 flex gap-3 overflow-x-auto">
+                        <button class="button aspect-square p-2 text-zinc-500" onClick={() => setIsAside(!getIsAside())}>
+                            <BiRegularArrowToLeft size={22} class={"transition " + (getIsAside() ? "" : "rotate-180")} />
+                        </button>
+                        <button class="button aspect-square p-2 text-zinc-500" onClick={() => setDark()}>
+                            <Show when={getIsDark()} fallback={<BiRegularMoon size={22} />}>
+                                <BiRegularSun size={22} />
+                            </Show>
                         </button>
                     </div>
                 </aside>
