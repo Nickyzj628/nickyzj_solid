@@ -28,6 +28,9 @@ function App(props: RouteSectionProps) {
     //     }))
     // })
 
+    // 切换menu
+    const [getIsMenu, setIsMenu] = createSignal(false)
+
     // 切换侧边栏
     const [getIsAside, setIsAside] = createSignal(true)
 
@@ -46,11 +49,23 @@ function App(props: RouteSectionProps) {
                     <span class="text-xl tracking-wide">NICKYZJ</span>
                 </a>
                 {/* menu@小屏 */}
-                <div class="flex sm:hidden">menu</div>
+                <div class="relative flex sm:hidden">
+                    <button class="button group z-10 flex-col justify-center gap-2 aspect-square p-2.5" onFocus={() => setIsMenu(true)} onBlur={() => setIsMenu(false)}>
+                        <div class="w-5 h-[2.5px] bg-gray-400/50 group-hover:bg-gray-500 rounded-full group-focus:rotate-45 group-focus:translate-y-[5.25px] transition"></div>
+                        <div class="w-5 h-[2.5px] bg-gray-400/50 group-hover:bg-gray-500 rounded-full group-focus:-rotate-45 group-focus:-translate-y-[5.25px] transition"></div>
+                    </button>
+                    <div class={"absolute flex flex-col gap-3 w-full rounded-xl transition-all " + (getIsMenu() ? "top-[52px] opacity-100" : "top-0 opacity-0")}>
+                        {routes.filter(route => Boolean(route.icon)).map(route =>
+                            <A href={route.path} class="button w-full p-2 text-gray-600">
+                                <Dynamic component={route.icon} size={22} />
+                            </A>
+                        )}
+                    </div>
+                </div>
                 <div class="flex items-center gap-4">
                     {/* 系统通知 */}
                     <button class="button p-2 dark:text-gray-300 bg-transparent rounded-full">
-                        <BiRegularBell size={21} />
+                        <BiRegularBell size={22} />
                     </button>
                     <div class="divider rounded-full h-5"></div>
                     {/* 用户中心 */}
@@ -74,10 +89,10 @@ function App(props: RouteSectionProps) {
                     </nav>
                     {/* 小工具 */}
                     <div class="sticky bottom-3 flex gap-3 overflow-x-auto">
-                        <button class="button aspect-square p-2 text-zinc-500" onClick={() => setIsAside(!getIsAside())}>
+                        <button class="button aspect-square p-2 text-gray-500" onClick={() => setIsAside(!getIsAside())}>
                             <BiRegularArrowToLeft size={22} class={"transition " + (getIsAside() ? "" : "rotate-180")} />
                         </button>
-                        <button class="button aspect-square p-2 text-zinc-500" onClick={() => setDark()}>
+                        <button class="button aspect-square p-2 text-gray-500" onClick={() => setDark()}>
                             <Show when={getIsDark()} fallback={<BiRegularMoon size={22} />}>
                                 <BiRegularSun size={22} />
                             </Show>
