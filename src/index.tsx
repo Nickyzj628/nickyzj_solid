@@ -88,11 +88,11 @@ function App(props: RouteSectionProps) {
                         )}
                     </nav>
                     {/* 小工具 */}
-                    <div class="sticky bottom-3 flex gap-3 overflow-x-auto">
-                        <button class="button aspect-square p-2 text-gray-500" onClick={() => setIsAside(!getIsAside())}>
+                    <div class="sticky bottom-3 flex gap-2 overflow-x-auto">
+                        <button class="button aspect-square p-2 text-gray-500 rounded-full" onClick={() => setIsAside(!getIsAside())}>
                             <BiRegularArrowToLeft size={22} class={"transition " + (getIsAside() ? "" : "rotate-180")} />
                         </button>
-                        <button class="button aspect-square p-2 text-gray-500" onClick={() => setDark()}>
+                        <button class="button aspect-square p-2 text-gray-500 rounded-full" onClick={() => setDark()}>
                             <Show when={getIsDark()} fallback={<BiRegularMoon size={22} />}>
                                 <BiRegularSun size={22} />
                             </Show>
