@@ -1,3 +1,15 @@
+import { createSignal, onMount } from "solid-js"
+import { request } from "../../lib/util"
+
 export default function Home() {
-    return <h1>Hello, home.</h1>
+    const [getShanbay, setShanbay] = createSignal<any>({})
+    onMount(async () => {
+        const [shanbay, err] = await request("/shanbay")
+        if (err) return
+        setShanbay(shanbay)
+    })
+    return <>
+        <h1>{getShanbay()?.shanbay?.content}</h1>
+        <p class="mt-2">{getShanbay()?.shanbay?.translation}</p>
+    </>
 }

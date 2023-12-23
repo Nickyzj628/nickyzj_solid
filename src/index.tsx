@@ -1,4 +1,4 @@
-import { Show, createEffect, createSignal } from "solid-js"
+import { For, Show, createEffect, createSignal } from "solid-js"
 import { Dynamic, render } from "solid-js/web"
 import { BiRegularArrowToLeft, BiRegularBell, BiRegularMoon, BiRegularSun } from "solid-icons/bi"
 import { A, Route, RouteSectionProps, Router, useLocation } from "@solidjs/router"
@@ -55,11 +55,13 @@ function App(props: RouteSectionProps) {
                         <div class="w-5 h-[2.5px] bg-gray-400/50 group-hover:bg-gray-500 rounded-full group-focus:-rotate-45 group-focus:-translate-y-[5.25px] transition"></div>
                     </button>
                     <div class={"absolute flex flex-col gap-3 w-full rounded-xl transition-all " + (getIsMenu() ? "top-[52px] opacity-100" : "top-0 opacity-0")}>
-                        {routes.filter(route => Boolean(route.icon)).map(route =>
-                            <A href={route.path} class="button w-full p-2 text-gray-600">
-                                <Dynamic component={route.icon} size={22} />
-                            </A>
-                        )}
+                        <For each={routes.filter(route => Boolean(route.icon))}>
+                            {(route) =>
+                                <A href={route.path} end={route.path === "/"} class="button w-full p-2" inactiveClass="text-gray-400 dark:text-gray-500">
+                                    <Dynamic component={route.icon} size={22} />
+                                </A>
+                            }
+                        </For>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
@@ -80,12 +82,14 @@ function App(props: RouteSectionProps) {
                 <aside class={"hidden md:flex flex-col justify-between w-20 p-3 bg-white dark:bg-gray-800 rounded-2xl transition-all " + (getIsAside() ? "lg:w-36 xl:w-52" : "")}>
                     {/* 导航 */}
                     <nav class="button-group sticky top-3 flex flex-col gap-5 overflow-x-hidden">
-                        {routes.filter(route => Boolean(route.icon)).map(route =>
-                            <A href={route.path} end={route.path === "/"} class="button text-base" activeClass="bg-gray-200" inactiveClass="bg-transparent">
-                                <Dynamic component={route.icon} size={22} />
-                                <span class={"whitespace-nowrap transition " + (getIsAside() ? "opacity-100" : "opacity-0")}>{route.title}</span>
-                            </A>
-                        )}
+                        <For each={routes.filter(route => Boolean(route.icon))}>
+                            {(route) =>
+                                <A href={route.path} end={route.path === "/"} class="button text-base" activeClass="bg-gray-200" inactiveClass="bg-transparent">
+                                    <Dynamic component={route.icon} size={22} />
+                                    <span class={"whitespace-nowrap transition " + (getIsAside() ? "opacity-100" : "opacity-0")}>{route.title}</span>
+                                </A>
+                            }
+                        </For>
                     </nav>
                     {/* 小工具 */}
                     <div class="sticky bottom-3 flex gap-2 overflow-x-auto">
@@ -117,8 +121,10 @@ function App(props: RouteSectionProps) {
 
 render(() => (
     <Router root={App}>
-        {routes.map(route =>
-            <Route path={route.path} component={route.component} />
-        )}
+        <For each={routes}>
+            {(route) =>
+                <Route path={route.path} component={route.component} />
+            }
+        </For>
     </Router>
 ), document.body)
