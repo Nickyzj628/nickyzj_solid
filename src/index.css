@@ -12,7 +12,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply border-4 border-solid border-transparent bg-gray-400/60 hover:bg-gray-400 bg-clip-content rounded-full;
+        @apply border-4 border-solid border-transparent bg-neutral-400/60 hover:bg-neutral-400 bg-clip-content rounded-full;
     }
 
     html {
@@ -22,27 +22,27 @@
     }
 
     h1 {
-        @apply text-3xl dark:text-white transition;
+        @apply text-3xl dark:text-neutral-100 transition;
     }
 
     h2 {
-        @apply text-2xl dark:text-white transition;
+        @apply text-2xl dark:text-neutral-100 transition;
     }
 
     h3 {
-        @apply text-xl dark:text-white transition;
+        @apply text-xl dark:text-neutral-100 transition;
     }
 
     h4 {
-        @apply text-lg dark:text-white transition;
+        @apply text-lg dark:text-neutral-100 transition;
     }
 
     h5 {
-        @apply text-base dark:text-white transition;
+        @apply text-base dark:text-neutral-100 transition;
     }
 
     h6 {
-        @apply text-sm dark:text-white transition;
+        @apply text-sm dark:text-neutral-100 transition;
     }
 
     a,
@@ -58,7 +58,7 @@
 /* https://preline.co/docs */
 @layer components {
     .divider {
-        @apply border-2 border-t sm:border-t-0 sm:border-s border-gray-100 dark:border-gray-700;
+        @apply border-[1.5px] border-t sm:border-t-0 sm:border-s border-neutral-100 dark:border-neutral-700 transition;
     }
 
     .link {
@@ -66,10 +66,10 @@
     }
 
     .button {
-        @apply py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600;
+        @apply py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-neutral-100 text-neutral-800 hover:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-300;
     }
 
     .button.active {
-        @apply bg-gray-200 dark:bg-white/20;
+        @apply bg-neutral-200 dark:bg-neutral-600;
     }
 }

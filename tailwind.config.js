@@ -5,7 +5,12 @@ export default {
     "./src/**/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionDuration: {
+        // DEFAULT: "800ms"
+      }
+    }
   },
   plugins: [],
+  darkMode: "class"
 }
