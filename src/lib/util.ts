@@ -22,7 +22,7 @@ export function getImage(path: string) {
 }
 
 /** 从Express服务器请求数据 */
-export async function request(path: string, options: RequestInit = {}) {
+export async function request<T>(path: string, options: RequestInit = {}): Promise<[Res<T> | null, unknown]> {
     // 设置请求头
     if (options.body && !(options.body instanceof FormData)) {
         options.headers = {
@@ -34,7 +34,7 @@ export async function request(path: string, options: RequestInit = {}) {
     }
     // 发送请求
     try {
-        const res = await fetch(`http://nickyzj.run:3030${path}`, options).then(res => res.json())
+        const res: Res<T> = await fetch(`http://nickyzj.run:3030${path}`, options).then(res => res.json())
         if (res?.message) throw res.message
         return [res, null]
     }

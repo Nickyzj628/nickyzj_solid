@@ -89,9 +89,9 @@ function App(props: RouteSectionProps) {
                     {/* 导航 */}
                     <nav class="sticky top-3 flex flex-col gap-5 overflow-x-hidden">
                         <For each={routes.filter(route => Boolean(route.icon))}>{(route) =>
-                            <A href={route.path} end={route.path === "/"} class="button text-base" activeClass="bg-neutral-200" inactiveClass="text-neutral-500 dark:text-neutral-500 bg-white dark:bg-neutral-800">
-                                <Dynamic component={route.icon} size={21} />
-                                <span class={"opacity-0 lg:opacity-100 whitespace-nowrap transition-opacity " + (getIsAside() ? "" : "opacity-0")}>{route.title}</span>
+                            <A href={route.path} end={route.path === "/"} class="button text-base" activeClass="bg-neutral-200" inactiveClass="opacity-60 hover:opacity-100">
+                                <Dynamic component={route.icon} size={21} class={"transition-transform " + (getIsAside() ? "" : "translate-x-0.5")} />
+                                <span class={"opacity-0 lg:opacity-100 whitespace-nowrap transition-opacity " + (getIsAside() ? "" : "lg:opacity-0")}>{route.title}</span>
                             </A>}
                         </For>
                     </nav>
