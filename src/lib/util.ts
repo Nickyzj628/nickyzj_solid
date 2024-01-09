@@ -50,5 +50,5 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
 
 /** 设置页面标题 */
 export function setTitle(...titles: string[]) {
-    document.title = [...titles, "NICKYZJ"].join(" | ")
+    document.title = [...titles, "NICKYZJ"].join(" / ")
 }
