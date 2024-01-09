@@ -22,7 +22,7 @@ export function getImage(path: string) {
 }
 
 /** 从Express服务器请求数据 */
-export async function request<T>(path: string, options: RequestInit = {}): Promise<[Res<T> | null, unknown]> {
+export async function request<T>(path: string, options: RequestInit = {}): Promise<[Res<T> | null, string]> {
     // 设置请求头
     if (options.body && !(options.body instanceof FormData)) {
         options.headers = {
@@ -36,11 +36,10 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
     try {
         const res: Res<T> = await fetch(`http://nickyzj.run:3030${path}`, options).then(res => res.json())
         if (res?.message) throw res.message
-        return [res, null]
+        return [res, ""]
     }
-    catch (err) {
-        console.warn(err);
-        return [null, err]
+    catch (err: any) {
+        return [null, err.message]
     }
 }
 

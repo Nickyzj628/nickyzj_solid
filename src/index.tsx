@@ -2,8 +2,8 @@ import { For, createEffect, createSignal, onMount } from "solid-js"
 import { Dynamic, render } from "solid-js/web"
 import { A, Route, RouteSectionProps, Router, useLocation } from "@solidjs/router"
 import { BiRegularArrowToLeft, BiRegularBell, BiRegularMoon, BiRegularSun } from "solid-icons/bi"
-import { getImage, setTitle, useThrottle } from "./lib/util"
-import { user } from "./lib/store"
+import { getImage, setTitle, useThrottle } from "./lib/utils"
+import { user } from "./lib/stores"
 import routes from "./lib/routes"
 
 function App(props: RouteSectionProps) {
@@ -56,10 +56,10 @@ function App(props: RouteSectionProps) {
                 {/* 路由表@小屏 */}
                 <div class="relative block sm:hidden">
                     <button class="peer group relative z-10 flex-col justify-center gap-1.5 p-3 aspect-square">
-                        <span class="w-4 h-0.5 bg-zinc-600 rounded-full group-focus:rotate-45 group-focus:translate-y-1 transition"></span>
-                        <span class="w-4 h-0.5 bg-zinc-600 rounded-full group-focus:-rotate-45 group-focus:-translate-y-1 transition"></span>
+                        <span class="w-4 h-0.5 bg-zinc-600 rounded-full group-focus:rotate-45 group-focus:tranzinc-y-1 transition"></span>
+                        <span class="w-4 h-0.5 bg-zinc-600 rounded-full group-focus:-rotate-45 group-focus:-tranzinc-y-1 transition"></span>
                     </button>
-                    <nav class="invisible opacity-0 absolute z-0 top-0 flex flex-col gap-2 peer-focus:visible peer-focus:opacity-100 peer-focus:translate-y-12 transition-all">
+                    <nav class="invisible opacity-0 absolute z-0 top-0 flex flex-col gap-2 peer-focus:visible peer-focus:opacity-100 peer-focus:tranzinc-y-12 transition-all">
                         <For each={routes.filter(route => Boolean(route.icon))}>{(route) =>
                             <A href={route.path} end={route.path === "/"} role="button" activeClass="active">
                                 <Dynamic component={route.icon} size={20} />
@@ -108,11 +108,11 @@ function App(props: RouteSectionProps) {
 
             <footer class="flex justify-center gap-1 p-3 text-sm text-zinc-400 dark:text-zinc-500 bg-white dark:bg-zinc-800 rounded-2xl transition">
                 <span>Powered by</span>
-                <a href="https://solidjs.com" target="_blank" class="link">Solid</a>
+                <a href="https://solidjs.com" target="_blank" class="text-opacity-80">Solid</a>
                 <span>+</span>
-                <a href="https://tailwindcss.com" target="_blank" class="link">Tailwind CSS</a>
+                <a href="https://tailwindcss.com" target="_blank" class="text-opacity-80">Tailwind CSS</a>
                 <span>+</span>
-                <a href="https://preline.co" target="_blank" class="link">Preline UI</a>
+                <a href="https://preline.co" target="_blank" class="text-opacity-80">Preline UI</a>
             </footer>
         </div>
     </>

@@ -1,5 +1,5 @@
 import { createEffect, createSignal, onMount } from "solid-js"
-import { request } from "../../lib/util"
+import { request } from "../../lib/utils"
 
 export default function Home() {
     const [getShanbay, setShanbay] = createSignal<Shanbay>()
