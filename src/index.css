@@ -45,13 +45,22 @@
         @apply text-sm;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-black dark:text-zinc-100 transition;
+    }
+
     a {
         @apply text-blue-600 dark:text-blue-400 hover:underline active:scale-95 transition;
     }
 
     button,
     [role=button] {
-        @apply p-2.5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-3xl bg-zinc-100 text-zinc-800 hover:bg-zinc-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:text-zinc-200 transition;
+        @apply p-2.5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-3xl bg-zinc-100 text-zinc-800 hover:bg-zinc-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:text-zinc-300 transition;
     }
 
     button.active,

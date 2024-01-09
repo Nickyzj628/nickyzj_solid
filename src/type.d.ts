@@ -1,5 +1,4 @@
-/** ------------ 后端接口数据格式 ------------ **/
-
+/** 后端请求返回数据类型 */
 type Res<T> = {
     data?: T;
     pages?: number;
@@ -9,10 +8,6 @@ type Res<T> = {
 type User = {
     id: string;
     username: string;
-    email?: string;
-    phone?: string;
-    sex?: string;
-    updated: number;
 }
 
 type Shanbay = {

@@ -49,7 +49,7 @@ function App(props: RouteSectionProps) {
         <div class="flex flex-col gap-3 min-h-screen p-3">
             <header class={"sticky z-10 flex items-center justify-between px-3 py-2 bg-white rounded-2xl dark:bg-zinc-800 transition-all " + (getIsHeader() ? "top-0" : "-top-16")}>
                 {/* logo@大屏 */}
-                <a href="/" class="hidden sm:flex items-center gap-1 text-black dark:text-zinc-200">
+                <a href="/" class="!no-underline hidden sm:flex items-center gap-1">
                     <img src="/favicon.webp" alt="" class="w-12" />
                     <h3>NICKYZJ</h3>
                 </a>
@@ -81,7 +81,7 @@ function App(props: RouteSectionProps) {
                 </div>
             </header>
 
-            <section class="flex flex-1 gap-3">
+            <div class="flex flex-1 gap-3">
                 <aside class={"hidden md:flex flex-col justify-between w-16 p-3 bg-white dark:bg-zinc-800 rounded-2xl transition-all " + (getIsAside() ? "lg:w-36 xl:w-52" : "")}>
                     {/* 路由表 */}
                     <nav class={"sticky top-3 flex flex-col gap-5 " + (getIsAside() ? "lg:gap-6" : "")}>
@@ -103,16 +103,16 @@ function App(props: RouteSectionProps) {
                     </div>
                 </aside>
                 {/* 路由页面 */}
-                <main class="flex-1 p-3 bg-white dark:bg-zinc-800 rounded-2xl transition">{props.children}</main>
-            </section>
+                <main class="flex flex-1 flex-wrap content-start gap-3 p-3 bg-white dark:bg-zinc-800 rounded-2xl transition">{props.children}</main>
+            </div>
 
             <footer class="flex justify-center gap-1 p-3 text-sm text-zinc-400 dark:text-zinc-500 bg-white dark:bg-zinc-800 rounded-2xl transition">
                 <span>Powered by</span>
-                <a href="https://solidjs.com" target="_blank" class="text-opacity-80">Solid</a>
+                <a href="https://solidjs.com" target="_blank" class="text-opacity-80 dark:text-opacity-80">Solid</a>
                 <span>+</span>
-                <a href="https://tailwindcss.com" target="_blank" class="text-opacity-80">Tailwind CSS</a>
+                <a href="https://tailwindcss.com" target="_blank" class="text-opacity-80 dark:text-opacity-80">Tailwind CSS</a>
                 <span>+</span>
-                <a href="https://preline.co" target="_blank" class="text-opacity-80">Preline UI</a>
+                <a href="https://preline.co" target="_blank" class="text-opacity-80 dark:text-opacity-80">Preline UI</a>
             </footer>
         </div>
     </>

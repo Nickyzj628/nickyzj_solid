@@ -12,6 +12,28 @@ export function useThrottle(fn: Function, time = 150) {
     }
 }
 
+/** 获取当前时间段 */
+export function getPeriod() {
+    const hour = new Date().getHours()
+    if (hour <= 9) return "早上"
+    if (hour > 9 && hour <= 12) return "上午"
+    if (hour > 12 && hour <= 17) return "下午"
+    return "晚上"
+}
+
+/** 计算给定时间距离当前有多久 */
+export function getDateDiff(date: string | number | Date) {
+    let res = Date.now() - new Date(date).getTime()
+    if (Number.isNaN(res)) return ""
+    const suffix = Math.sign(res) > 0 ? "前" : "后"
+    if ((res = Math.abs(res) / 1000) < 60) return Math.floor(res) + "秒" + suffix
+    if ((res /= 60) < 60) return Math.floor(res) + "分钟" + suffix
+    if ((res /= 60) < 24) return Math.floor(res) + "小时" + suffix
+    if ((res /= 24) < 30) return Math.floor(res) + "天" + suffix
+    if ((res /= 30) < 12) return Math.floor(res) + "个月" + suffix
+    return Math.floor(res / 12) + "年" + suffix
+}
+
 
 
 /** ------------ 接口 ------------ **/
