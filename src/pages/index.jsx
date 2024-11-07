@@ -10,8 +10,8 @@ const Page = () => {
   return <>
     <Title>NICKYZJ</Title>
 
-    <h1>Hello, home{"!".repeat(getCount())}</h1>
-    <button onClick={addCount}>+1</button>
+    <h1 className="text-3xl font-bold">Hello, home{"!".repeat(getCount())}</h1>
+    <button className="h-10 aspect-square justify-center" onClick={addCount}>+1</button>
   </>;
 };
 
