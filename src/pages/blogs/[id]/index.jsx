@@ -3,11 +3,12 @@ import { useParams } from "@solidjs/router";
 
 const Page = () => {
   const params = useParams();
+  const getId = () => params.id;
 
   return <>
-    <Title>{params.id} / NICKYZJ</Title>
+    <Title>{`${getId()} / NICKYZJ`}</Title>
 
-    <h1>Hello, blog {params.id}</h1>
+    <h1>Hello, blog {getId()}</h1>
   </>;
 };
 

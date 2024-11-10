@@ -40,10 +40,10 @@
 
     /* 多媒体 */
     img {
-        @apply object-cover transition dark:brightness-90;
+        @apply object-cover dark:brightness-90;
     }
     svg {
-        @apply shrink-0 transition-none;
+        @apply shrink-0 transition-none dark:brightness-90;
     }
     video {
         @apply object-contain outline-none rounded-xl overflow-hidden;
@@ -82,12 +82,12 @@
 @layer components {
     /* bento box */
     .bento {
-        @apply p-3 bg-white rounded-xl transition dark:bg-zinc-800;
+        @apply p-3 bg-white rounded-xl transition dark:bg-zinc-900;
     }
 
     /* 垂直分割线 */
     .divider {
-        @apply w-0.5 h-6 bg-zinc-200/60 rounded-full transition dark:bg-zinc-700/60;
+        @apply w-0.5 h-6 bg-zinc-200/60 rounded-full transition dark:bg-zinc-800/60;
     }
 
     /* 徽标 */
