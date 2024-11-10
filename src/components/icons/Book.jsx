@@ -1,3 +1,3 @@
-import BookIcon from "~/public/images/book.svg?component-solid";
+import BookIcon from "@/assets/book.svg?component-solid";
 
 export default BookIcon;

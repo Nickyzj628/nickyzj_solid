@@ -1,3 +1,3 @@
-import TvIcon from "~/public/images/tv.svg?component-solid";
+import TvIcon from "@/assets/tv.svg?component-solid";
 
 export default TvIcon;

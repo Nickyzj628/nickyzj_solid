@@ -1,3 +1,3 @@
-import HomeIcon from "~/public/images/home.svg?component-solid";
+import HomeIcon from "@/assets/home.svg?component-solid";
 
 export default HomeIcon;

@@ -1,3 +1,3 @@
-import MoonIcon from "~/public/images/moon.svg?component-solid";
+import MoonIcon from "@/assets/moon.svg?component-solid";
 
 export default MoonIcon;
