@@ -13,7 +13,10 @@ const Aside = () => {
   const getCurrentPath = () => location.pathname.match(/\/[^\/]*/)[0];
 
   // 伸缩侧边栏
-  const [getIsAsideFold, setIsAsideFold] = createSignal(false);
+  const [getIsAsideFold, setIsAsideFold] = createSignal(Boolean(localStorage.isAsideFold));
+  createEffect(() => {
+    localStorage.isAsideFold = getIsAsideFold() ? "1" : "";
+  });
 
   // 手动切换深色模式
   const [getIsDark, setIsDark] = createSignal(window.matchMedia("(prefers-color-scheme: dark)").matches);

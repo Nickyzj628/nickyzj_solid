@@ -57,7 +57,7 @@ const Header = () => {
           <NotificationIcon className="size-5" />
         </button>
         <div className="divider"></div>
-        <button className="gap-1.5 !bg-transparent p-0" onClick={() => toast("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}>
+        <button className="gap-1.5 !bg-transparent p-0" onClick={() => toast("用户数据表维护中！")}>
           <span className="hidden sm:inline">{getUser().name}</span>
           <Avatar />
         </button>

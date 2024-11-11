@@ -25,7 +25,7 @@ export const toast = (message, type = "info") => {
   setToasts((toasts) => {
     toasts.push({
       id: Date.now().toString(36),
-      type: ["success", "info", "warning", "error"][Math.floor(Math.random() * 4)],
+      type,
       message,
     });
     return toasts.slice();
