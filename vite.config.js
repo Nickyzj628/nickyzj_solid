@@ -11,4 +11,4 @@ export default defineConfig({
     },
   },
   plugins: [solid(), solidSvg(), pagesPlugin()],
-})
+});
