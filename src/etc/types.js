@@ -1,4 +1,10 @@
 /**
+ * @typedef {Object} User
+ * @property {string} id
+ * @property {string} name
+ */
+
+/**
  * @typedef {Object} Shanbay
  * @property {string} content
  * @property {string} translation
@@ -28,6 +34,8 @@
  * @property {number} updated
  */
 
+
+
 /**
  * @typedef {Object} Response
  * @property {number} statusCode
@@ -35,21 +43,20 @@
  */
 
 /**
+ * @typedef {Object} PageResponse
+ * @property {number} page
+ * @property {number} pageSize
+ * @property {number} pages
+ */
+
+/**
  * @typedef {Response & Shanbay} ShanbayResponse
  */
 
 /**
- * @typedef {Response} BlogsResponse
- * @property {number} page
- * @property {number} pageSize
- * @property {number} pages
- * @property {Blog[]} blogs
+ * @typedef {Response & PageResponse & {blogs: Blog[]}} BlogsResponse
  */
 
 /**
- * @typedef {Response} AnimesResponse
- * @property {number} page
- * @property {number} pageSize
- * @property {number} pages
- * @property {Anime[]} animes
+ * @typedef {Response & PageResponse & {animes: Anime[]}} AnimesResponse
  */

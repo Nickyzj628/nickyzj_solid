@@ -6,6 +6,7 @@ import { clsx } from "@/services/dom";
 import { useLocation } from "@solidjs/router";
 import { createEffect, createSignal, For, onMount } from "solid-js";
 import { Dynamic } from "solid-js/web";
+import styles from "./index.module.css";
 
 const Aside = () => {
   // 高亮当前顶层路由
@@ -33,10 +34,10 @@ const Aside = () => {
   return (
     <aside className={clsx("bento hidden sm:flex flex-col justify-between w-16 rounded-xl transition-all", !getIsAsideFold() && "lg:w-36 xl:w-44")}>
       {/* nav */}
-      <nav className={clsx("sticky top-3 flex flex-col gap-3", !getIsAsideFold() && "lg:gap-4")}>
+      <nav className={clsx(styles.nav, "flex flex-col sticky top-3 gap-3", !getIsAsideFold() && "lg:gap-5")}>
         <For each={navs}>
           {(nav) => (
-            <a href={nav.path} className={clsx("button gap-1.5 whitespace-nowrap hover:no-underline", !getIsAsideFold() && "lg:rounded-xl", nav.path === getCurrentPath() ? "active" : "bg-transparent opacity-50 hover:opacity-100 dark:bg-transparent")}>
+            <a href={nav.path} className={clsx("button flex gap-1.5 whitespace-nowrap hover:no-underline", !getIsAsideFold() && "lg:rounded-xl", nav.path === getCurrentPath() ? "active" : "opacity-50 bg-transparent hover:opacity-100 dark:bg-transparent")}>
               <Dynamic component={nav.icon} className={clsx("size-5", !getIsAsideFold() && "lg:size-6")} />
               <span className={clsx("hidden", !getIsAsideFold() && "lg:inline")}>{nav.title}</span>
             </a>

@@ -12,9 +12,9 @@ const App = (props) => {
       <UserProvider>
         <div className="flex flex-col gap-3 min-h-screen p-3">
           <Header />
-          <div className="flex flex-1 gap-3">
+          <div className="flex gap-3 flex-1">
             <Aside />
-            <main className="bento flex-1">
+            <main className="bento flex flex-wrap items-start content-start gap-3 flex-1 overflow-hidden">
               {props.children}
             </main>
           </div>

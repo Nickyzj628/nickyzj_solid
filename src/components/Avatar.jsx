@@ -1,6 +1,6 @@
-import { clsx } from "@/services/dom";
 import { getImage } from "@/services/network";
 import { createSignal } from "solid-js";
+import { twMerge } from "tailwind-merge";
 
 /**
  * 头像，默认显示当前用户的
@@ -15,7 +15,7 @@ const Avatar = (props) => {
     <img
       src={getSrc()}
       alt=""
-      className={clsx("size-12 rounded-full", props.className)}
+      className={twMerge("size-12 rounded-full", props.className)}
       onError={() => setSrc(getImage("Avatars/Guest.webp"))}
     />
   );

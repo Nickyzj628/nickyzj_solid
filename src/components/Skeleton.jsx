@@ -1,4 +1,4 @@
-import { clsx } from "@/services/dom";
+import { twMerge } from "tailwind-merge";
 
 /**
  * 骨架屏
@@ -9,7 +9,7 @@ import { clsx } from "@/services/dom";
  */
 const Skelecton = (props) => {
   return (
-    <div className={clsx("bg-zinc-200 transition dark:bg-zinc-800", props.isAnimate && "animate-pulse", props.className)} >
+    <div className={twMerge("bg-zinc-200 transition dark:bg-zinc-800", props.isAnimate && "animate-pulse", props.className)} >
       {props.children}
     </div>
   );
