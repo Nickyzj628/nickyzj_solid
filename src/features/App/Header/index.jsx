@@ -8,7 +8,7 @@ import { throttle } from "@/services/time";
 import { useLocation } from "@solidjs/router";
 import { createSignal, For, onMount } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { toast } from "./Toaster";
+import { toast } from "../Toaster";
 
 const Header = () => {
   const [getUser] = useUserContext();
