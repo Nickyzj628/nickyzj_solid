@@ -19,9 +19,9 @@ const Masonry = (props) => {
   const getGap = createMemo(() => props.gap || 1);
 
   // 计算元素所占行数
-  const calcRows = throttle(() => {
+  const calcRows = throttle((startIdx = 0) => {
     // 获取容器下的所有一级子元素
-    const items = container.querySelectorAll(":scope > *");
+    const items = Array.from(container.children).slice(startIdx);
     // 获取当前列数
     const cols = window.getComputedStyle(container).gridTemplateColumns.split(" ").length;
     items.forEach((item, index) => {
@@ -29,7 +29,7 @@ const Masonry = (props) => {
       const marginTop = index >= cols ? getGap() : 0;
       // 根据元素高度设置元素占用的行数
       // Math.floor/ceil都会导致少量元素少/多一份行高
-      // 折中一下使用round，配合尽可能小的ROW_HEIGHT，最坏情况只少/多占用半份行高
+      // 折中一下使用round，配合尽可能小的ROW_HEIGHT，最坏情况只少/多占用半份行高（1px）
       const rows = Math.round(item.clientHeight / ROW_HEIGHT) + marginTop;
       item.style.gridRowEnd = `span ${rows}`;
     });
@@ -52,8 +52,8 @@ const Masonry = (props) => {
     // 等待所有图片加载完
     const onImageLoad = async () => {
       if (++loadedImageCount < images.length) return;
-      // 初次排版结束再展示
-      calcRows();
+      calcRows(entries.length - loadedImageCount);
+      // 排版结束再展示
       await delay();
       nodes.forEach((node) => {
         node.style.visibility = "visible";

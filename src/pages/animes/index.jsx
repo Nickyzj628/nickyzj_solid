@@ -1,12 +1,11 @@
 import Card from "@/components/Card";
 import Masonry from "@/components/Masonry";
-import Skelecton from "@/components/Skeleton";
 import { useInViewport } from "@/services/dom";
 import { getImage, getAnimes as requestAnimes } from "@/services/network";
 import { removeSpaces } from "@/services/string";
 import { Title } from "@solidjs/meta";
 import dayjs from "dayjs";
-import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
+import { createSignal, For, onCleanup, onMount } from "solid-js";
 
 const Page = () => {
   /** @type {HTMLDivElement} */
