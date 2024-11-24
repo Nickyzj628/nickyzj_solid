@@ -37,14 +37,27 @@ const Masonry = (props) => {
 
   // 图片全部加载完成再排版
   let loadedImageCount = 0;
-  const ob = new MutationObserver(() => {
-    const images = container.querySelectorAll("img");
+  const ob = new MutationObserver((entries) => {
+    // 先收集所有图片
+    const nodes = [];
+    const images = [];
+    entries.forEach((entry) => {
+      const node = entry.addedNodes[0];
+      const nodeImages = node.querySelectorAll("img");
+      nodes.push(node);
+      images.push(...nodeImages);
+      // 加载完成前直接隐藏，也可以改成骨架屏
+      node.style.visibility = "hidden";
+    });
+    // 等待所有图片加载完
     const onImageLoad = async () => {
       if (++loadedImageCount < images.length) return;
+      // 初次排版结束再展示
       calcRows();
-      // 初次排版结束再展示瀑布流
       await delay();
-      container.style.visibility = "visible";
+      nodes.forEach((node) => {
+        node.style.visibility = "visible";
+      });
     };
     images.forEach((image) => {
       image.onload = onImageLoad;
@@ -69,7 +82,6 @@ const Masonry = (props) => {
       ref={container}
       className={twMerge("grid grid-cols-4 items-end", props.className)}
       style={{
-        "visibility": "hidden",
         "grid-auto-rows": `${ROW_HEIGHT}px`,
         "column-gap": `${ROW_HEIGHT * getGap()}px`
       }}

@@ -14,7 +14,7 @@ const App = (props) => {
           <Header />
           <div className="flex gap-3 flex-1">
             <Aside />
-            <main className="bento flex flex-wrap items-start content-start gap-3 flex-1 overflow-hidden">
+            <main className="bento relative flex flex-wrap items-start content-start gap-3 flex-1 overflow-hidden">
               {props.children}
             </main>
           </div>
